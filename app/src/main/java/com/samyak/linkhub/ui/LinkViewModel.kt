@@ -54,7 +54,14 @@ class LinkViewModel(application: Application) : AndroidViewModel(application) {
         _sortOption,
         _filterOption,
         _selectedCategory
-    ) { allLinks, favorites, query, sort, filter, category ->
+    ) { flows ->
+        val allLinks = flows[0] as List<Link>
+        val favorites = flows[1] as List<Link>
+        val query = flows[2] as String
+        val sort = flows[3] as SortOption
+        val filter = flows[4] as FilterOption
+        val category = flows[5] as String?
+        
         var links = when (filter) {
             FilterOption.ALL -> allLinks
             FilterOption.FAVORITES -> favorites
@@ -72,7 +79,7 @@ class LinkViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
         
-        // Apply sorting
+        // Apply sorting and return
         when (sort) {
             SortOption.DATE_DESC -> links.sortedByDescending { it.createdAt }
             SortOption.DATE_ASC -> links.sortedBy { it.createdAt }

@@ -66,6 +66,15 @@ dependencies {
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     
+    // Coil for image loading
+    implementation(libs.coil.compose)
+    
+    // DataStore
+    implementation(libs.androidx.datastore.preferences)
+    
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

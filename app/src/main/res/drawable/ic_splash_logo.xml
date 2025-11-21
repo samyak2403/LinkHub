@@ -1,0 +1,49 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- Background circle with gradient effect -->
+    <path
+        android:fillColor="#6200EE"
+        android:pathData="M60,10 C31.72,10 9,32.72 9,61 C9,89.28 31.72,112 60,112 C88.28,112 111,89.28 111,61 C111,32.72 88.28,10 60,10 Z" />
+    
+    <!-- Inner circle for depth -->
+    <path
+        android:fillColor="#7C4DFF"
+        android:pathData="M60,15 C34.59,15 14,35.59 14,61 C14,86.41 34.59,107 60,107 C85.41,107 106,86.41 106,61 C106,35.59 85.41,15 60,15 Z" />
+    
+    <!-- Link chain - left link -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,55 L42,55 C45,55 48,58 48,61 C48,64 45,67 42,67 L35,67 C32,67 29,64 29,61 C29,58 32,55 35,55 Z"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- Link chain - right link -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M78,55 L85,55 C88,55 91,58 91,61 C91,64 88,67 85,67 L78,67 C75,67 72,64 72,61 C72,58 75,55 78,55 Z"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- Connecting bar -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M42,59 L78,59 L78,63 L42,63 Z" />
+    
+    <!-- Star accent - top -->
+    <path
+        android:fillColor="#03DAC6"
+        android:pathData="M60,35 L62.5,43 L71,43 L64.5,48 L67,56 L60,51 L53,56 L55.5,48 L49,43 L57.5,43 Z" />
+    
+    <!-- Small sparkle effects -->
+    <path
+        android:fillColor="#03DAC6"
+        android:pathData="M25,30 L26,33 L29,33 L26.5,35 L27.5,38 L25,36 L22.5,38 L23.5,35 L21,33 L24,33 Z" />
+    
+    <path
+        android:fillColor="#03DAC6"
+        android:pathData="M95,85 L96,88 L99,88 L96.5,90 L97.5,93 L95,91 L92.5,93 L93.5,90 L91,88 L94,88 Z" />
+</vector>

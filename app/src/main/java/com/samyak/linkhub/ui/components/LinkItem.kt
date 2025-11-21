@@ -29,87 +29,114 @@ fun LinkItem(
                 onClick = onClick,
                 onLongClick = onLongClick
             ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = MaterialTheme.shapes.medium
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(12.dp),
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Favicon placeholder
+            // Favicon
             Surface(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size(56.dp),
                 shape = MaterialTheme.shapes.medium,
-                color = MaterialTheme.colorScheme.primaryContainer
+                color = MaterialTheme.colorScheme.primaryContainer,
+                tonalElevation = 1.dp
             ) {
                 Box(
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = link.title.firstOrNull()?.uppercase() ?: "L",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
+                    if (link.faviconUrl.isNotEmpty()) {
+                        coil.compose.AsyncImage(
+                            model = link.faviconUrl,
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    } else {
+                        Text(
+                            text = link.title.firstOrNull()?.uppercase() ?: "L",
+                            style = MaterialTheme.typography.headlineMedium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
                 }
             }
             
-            Spacer(modifier = Modifier.width(16.dp))
-            
+            // Content
             Column(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(vertical = 4.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
+                // Title and Star
                 Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = link.title,
                         style = MaterialTheme.typography.titleMedium,
-                        maxLines = 1,
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                        maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f)
                     )
                     
                     IconButton(
                         onClick = onFavoriteClick,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(32.dp)
                     ) {
                         Icon(
                             imageVector = if (link.isFavorite) Icons.Filled.Star else Icons.Outlined.StarBorder,
                             contentDescription = if (link.isFavorite) "Remove from favorites" else "Add to favorites",
                             tint = if (link.isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(22.dp)
                         )
                     }
                 }
                 
-                Spacer(modifier = Modifier.height(4.dp))
-                
+                // URL
                 Text(
                     text = link.url,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
                 
+                // Category and Views
                 if (link.category.isNotBlank() || link.clickCount > 0) {
-                    Spacer(modifier = Modifier.height(8.dp))
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         if (link.category.isNotBlank()) {
                             AssistChip(
                                 onClick = {},
-                                label = { Text(link.category, style = MaterialTheme.typography.labelSmall) },
-                                modifier = Modifier.height(24.dp)
+                                label = { 
+                                    Text(
+                                        link.category, 
+                                        style = MaterialTheme.typography.labelSmall
+                                    ) 
+                                },
+                                modifier = Modifier.height(28.dp)
                             )
                         }
                         if (link.clickCount > 0) {
                             AssistChip(
                                 onClick = {},
-                                label = { Text("${link.clickCount} views", style = MaterialTheme.typography.labelSmall) },
-                                modifier = Modifier.height(24.dp)
+                                label = { 
+                                    Text(
+                                        "👁 ${link.clickCount}", 
+                                        style = MaterialTheme.typography.labelSmall
+                                    ) 
+                                },
+                                modifier = Modifier.height(28.dp)
                             )
                         }
                     }

@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import com.samyak.linkhub.data.Link
 import java.net.URL
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddLinkDialog(
     onDismiss: () -> Unit,
@@ -28,11 +29,18 @@ fun AddLinkDialog(
     
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (existingLink != null) "Edit Link" else "Add New Link") },
+        title = { 
+            Text(
+                if (existingLink != null) "Edit Link" else "Add New Link",
+                style = MaterialTheme.typography.headlineSmall
+            ) 
+        },
         text = {
             Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 OutlinedTextField(
                     value = title,
